@@ -1,0 +1,599 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+
+    .host-dashboard {
+        padding-bottom: 3rem;
+    }
+
+    .dashboard-title {
+        font-weight: 700;
+    }
+
+    .dashboard-subtitle {
+        color: #717171;
+    }
+
+    /* =========================
+       STAT CARDS
+    ========================= */
+
+    .stats-card {
+        border: 1px solid #e5e5e5;
+        border-radius: 16px;
+        padding: 1.4rem;
+        background: white;
+        height: 100%;
+        transition: 0.2s ease;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .stats-icon {
+        width: 45px;
+        height: 45px;
+
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: #f7f7f7;
+
+        font-size: 1.2rem;
+
+        margin-bottom: 1rem;
+    }
+
+    .stats-label {
+        color: #717171;
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .stats-number {
+        font-size: 1.7rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+
+    /* =========================
+       BOOKING CARDS
+    ========================= */
+
+    .host-booking-card {
+        border: 1px solid #e5e5e5;
+        border-radius: 16px;
+        overflow: hidden;
+        background: white;
+        transition: 0.2s ease;
+    }
+
+    .host-booking-card:hover {
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .host-booking-img {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+    }
+
+    .booking-info {
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+    .booking-info p {
+        margin-bottom: 0.6rem;
+    }
+
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .status-badge {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+</style>
+
+
+<div class="container mt-4 host-dashboard">
+
+
+    <!-- ======================================
+         HEADER
+    ======================================= -->
+
+    <div class="mb-4">
+
+        <h2 class="dashboard-title">
+
+            <i class="fa-solid fa-house-user"></i>
+
+            Host Dashboard
+
+        </h2>
+
+        <p class="dashboard-subtitle">
+
+            Manage your properties and reservation requests.
+
+        </p>
+
+    </div>
+
+
+    <!-- ======================================
+         DASHBOARD STATS
+    ======================================= -->
+
+    <div class="row g-3 mb-5">
+
+
+        <!-- PROPERTIES -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="stats-card">
+
+                <div class="stats-icon">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+
+                <p class="stats-label">
+                    Total Properties
+                </p>
+
+                <p class="stats-number">
+                    <%= totalProperties %>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PENDING -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="stats-card">
+
+                <div class="stats-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <p class="stats-label">
+                    Pending Requests
+                </p>
+
+                <p class="stats-number">
+                    <%= pendingBookings %>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONFIRMED -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="stats-card">
+
+                <div class="stats-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+
+                <p class="stats-label">
+                    Confirmed Bookings
+                </p>
+
+                <p class="stats-number">
+                    <%= confirmedBookings %>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- REVENUE -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="stats-card">
+
+                <div class="stats-icon">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+
+                <p class="stats-label">
+                    Total Revenue
+                </p>
+
+                <p class="stats-number">
+
+                    &#8377;<%= totalRevenue.toLocaleString("en-IN") %>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================
+         RESERVATIONS
+    ======================================= -->
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h3>
+            Reservation Requests
+        </h3>
+
+        <span class="text-muted">
+
+            <%= bookings.length %> bookings
+
+        </span>
+
+    </div>
+
+
+    <!-- ======================================
+         NO BOOKINGS
+    ======================================= -->
+
+    <% if (bookings.length === 0) { %>
+
+        <div class="text-center py-5">
+
+            <i
+                class="fa-solid fa-calendar-xmark"
+                style="font-size: 3rem; color: #fe424d;"
+            ></i>
+
+            <h4 class="mt-3">
+                No reservations yet
+            </h4>
+
+            <p class="text-muted">
+
+                When guests book your properties,
+                their requests will appear here.
+
+            </p>
+
+        </div>
+
+
+    <% } else { %>
+
+
+        <!-- ======================================
+             BOOKING GRID
+        ======================================= -->
+
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+
+
+            <% for (let booking of bookings) { %>
+
+
+                <% if (booking.listing) { %>
+
+
+                    <div class="col">
+
+
+                        <div class="host-booking-card h-100">
+
+
+                            <!-- IMAGE -->
+
+                            <img
+                                src="<%= booking.listing.image.url %>"
+                                class="host-booking-img"
+                                alt="property"
+                            >
+
+
+                            <div class="p-3">
+
+
+                                <!-- PROPERTY NAME -->
+
+                                <h5 class="mb-1">
+
+                                    <%= booking.listing.title %>
+
+                                </h5>
+
+
+                                <!-- LOCATION -->
+
+                                <p class="text-muted mb-3">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <%= booking.listing.location %>,
+                                    <%= booking.listing.country %>
+
+                                </p>
+
+
+                                <hr>
+
+
+                                <div class="booking-info">
+
+
+                                    <!-- GUEST -->
+
+                                    <p>
+
+                                        <strong>Guest:</strong>
+
+                                        <%= booking.user
+                                            ? booking.user.username
+                                            : "Unknown User"
+                                        %>
+
+                                    </p>
+
+
+                                    <!-- CHECK IN -->
+
+                                    <p>
+
+                                        <strong>Check-in:</strong>
+
+                                        <%= new Date(
+                                            booking.checkIn
+                                        ).toLocaleDateString("en-IN") %>
+
+                                    </p>
+
+
+                                    <!-- CHECK OUT -->
+
+                                    <p>
+
+                                        <strong>Check-out:</strong>
+
+                                        <%= new Date(
+                                            booking.checkOut
+                                        ).toLocaleDateString("en-IN") %>
+
+                                    </p>
+
+
+                                    <!-- NIGHTS -->
+
+                                    <p>
+
+                                        <strong>Nights:</strong>
+
+                                        <%= booking.nights %>
+
+                                    </p>
+
+
+                                    <!-- PRICE -->
+
+                                    <p>
+
+                                        <strong>Amount:</strong>
+
+                                        &#8377;<%= booking.totalPrice
+                                            .toLocaleString("en-IN") %>
+
+                                    </p>
+
+
+                                </div>
+
+
+                                <!-- ======================================
+                                     STATUS
+                                ======================================= -->
+
+                                <div class="mb-3">
+
+                                    <strong>Status:</strong>
+
+
+                                    <% if (booking.status === "pending") { %>
+
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+
+
+                                    <% } else if (booking.status === "confirmed") { %>
+
+                                        <span class="badge bg-success">
+                                            Confirmed
+                                        </span>
+
+
+                                    <% } else if (booking.status === "rejected") { %>
+
+                                        <span class="badge bg-danger">
+                                            Rejected
+                                        </span>
+
+
+                                    <% } else if (booking.status === "cancelled") { %>
+
+                                        <span class="badge bg-secondary">
+                                            Cancelled
+                                        </span>
+
+
+                                    <% } else if (booking.status === "completed") { %>
+
+                                        <span class="badge bg-primary">
+                                            Completed
+                                        </span>
+
+                                    <% } %>
+
+                                </div>
+
+
+                                <!-- ======================================
+                                     PENDING ACTIONS
+                                ======================================= -->
+
+                                <% if (booking.status === "pending") { %>
+
+
+                                    <div class="d-flex gap-2">
+
+
+                                        <!-- ACCEPT -->
+
+                                        <form
+                                            action="/bookings/<%= booking._id %>/accept?_method=PATCH"
+                                            method="POST"
+                                        >
+
+                                            <button
+                                                type="submit"
+                                                class="btn btn-success"
+                                            >
+
+                                                <i class="fa-solid fa-check"></i>
+
+                                                Accept
+
+                                            </button>
+
+                                        </form>
+
+
+                                        <!-- REJECT -->
+
+                                        <form
+                                            action="/bookings/<%= booking._id %>/reject?_method=PATCH"
+                                            method="POST"
+                                        >
+
+                                            <button
+                                                type="submit"
+                                                class="btn btn-outline-danger"
+                                            >
+
+                                                <i class="fa-solid fa-xmark"></i>
+
+                                                Reject
+
+                                            </button>
+
+                                        </form>
+
+
+                                    </div>
+
+
+                                <% } %>
+
+
+                                <!-- CONFIRMED MESSAGE -->
+
+                                <% if (booking.status === "confirmed") { %>
+
+                                    <p class="text-success mb-0">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        Reservation confirmed
+
+                                    </p>
+
+                                <% } %>
+
+
+                                <!-- REJECTED MESSAGE -->
+
+                                <% if (booking.status === "rejected") { %>
+
+                                    <p class="text-danger mb-0">
+
+                                        <i class="fa-solid fa-circle-xmark"></i>
+
+                                        Reservation rejected
+
+                                    </p>
+
+                                <% } %>
+
+
+                                <!-- CANCELLED MESSAGE -->
+
+                                <% if (booking.status === "cancelled") { %>
+
+                                    <p class="text-muted mb-0">
+
+                                        <i class="fa-solid fa-ban"></i>
+
+                                        Cancelled by guest
+
+                                    </p>
+
+                                <% } %>
+
+
+                                <!-- COMPLETED -->
+
+                                <% if (booking.status === "completed") { %>
+
+                                    <p class="text-primary mb-0">
+
+                                        <i class="fa-solid fa-check-double"></i>
+
+                                        Stay completed
+
+                                    </p>
+
+                                <% } %>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                <% } %>
+
+
+            <% } %>
+
+
+        </div>
+
+
+    <% } %>
+
+
+</div>

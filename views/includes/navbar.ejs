@@ -1,0 +1,273 @@
+<style>
+/* ==============================
+   NAVBAR SEARCH
+================================ */
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    border-radius: 50px !important;
+    padding: 0.6rem 1.5rem;
+    width: 300px;
+    height: 42px;
+}
+
+.search-input:focus {
+    box-shadow: none;
+    border-color: #fe424d;
+}
+
+.btn-Search {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 50px;
+    padding: 0.5rem 1.2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    white-space: nowrap;
+}
+
+.btn-Search:hover {
+    background-color: #fe424d;
+    color: #fff;
+}
+
+
+/* ==============================
+   MOBILE
+================================ */
+
+@media (max-width: 767px) {
+
+    .navbar {
+        height: auto !important;
+        min-height: 4.5rem;
+        padding: 0.7rem 0;
+    }
+
+    .navbar-collapse {
+        margin-top: 0.8rem;
+    }
+
+    .navbar-nav {
+        gap: 0.2rem;
+    }
+
+    .nav-link {
+        padding: 0.7rem 0.5rem !important;
+    }
+
+    .search-form {
+        width: 100%;
+        margin: 0.7rem 0;
+    }
+
+    .search-input {
+        width: 100%;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .btn-Search {
+        flex-shrink: 0;
+    }
+
+}
+</style>
+
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+
+    <div class="container-fluid">
+
+        <!-- LOGO -->
+
+        <a class="navbar-brand" href="/listings">
+            <i class="fa-brands fa-airbnb"></i>
+        </a>
+
+
+        <!-- HAMBURGER -->
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#staybeeNavbar"
+            aria-controls="staybeeNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <!-- EVERYTHING INSIDE ONE COLLAPSE -->
+
+        <div
+            class="collapse navbar-collapse"
+            id="staybeeNavbar"
+        >
+
+
+            <!-- EXPLORE -->
+
+            <div class="navbar-nav">
+
+                <a
+                    class="nav-link"
+                    href="/listings"
+                >
+                    <b>Explore</b>
+                </a>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <form
+                class="search-form mx-md-auto"
+                role="search"
+                action="/listings"
+                method="GET"
+            >
+
+                <input
+                    class="form-control me-2 search-input"
+                    type="search"
+                    name="search"
+                    placeholder="Search destinations"
+                    aria-label="Search"
+                >
+
+                <button
+                    class="btn btn-Search"
+                    type="submit"
+                >
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <span>Search</span>
+
+                </button>
+
+            </form>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="navbar-nav ms-md-auto">
+
+                <a
+                    class="nav-link"
+                    href="/listings/new"
+                >
+                    Airbnb your home
+                </a>
+
+
+                <!-- NOT LOGGED IN -->
+
+                <% if (!currUser) { %>
+
+                    <a
+                        class="nav-link"
+                        href="/signup"
+                    >
+                        <b>Sign Up</b>
+                    </a>
+
+                    <a
+                        class="nav-link"
+                        href="/login"
+                    >
+                        <b>Log in</b>
+                    </a>
+
+                <% } %>
+
+
+                <!-- LOGGED IN -->
+
+                <% if (currUser) { %>
+
+                    <a
+                        class="nav-link"
+                        href="/wishlist"
+                    >
+                        <i class="fa-regular fa-heart"></i>
+                        <b>Wishlist</b>
+                    </a>
+
+
+                    <a
+                        class="nav-link"
+                        href="/bookings"
+                    >
+                        <i class="fa-solid fa-suitcase"></i>
+                        My Bookings
+                    </a>
+
+
+                    <% if (userIsHost) { %>
+
+                        <a
+                            class="nav-link"
+                            href="/bookings/host"
+                        >
+                            <i class="fa-solid fa-house-user"></i>
+                            Dashboard
+                        </a>
+
+                    <% } %>
+
+
+                    <a
+                        class="nav-link"
+                        href="/logout"
+                    >
+                        <b>Log Out</b>
+                    </a>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<div class="mobile-search">
+
+    <form
+        class="mobile-search-form"
+        role="search"
+        action="/listings"
+        method="GET"
+    >
+
+        <input
+            class="form-control"
+            type="search"
+            name="search"
+            placeholder="Search destinations"
+            aria-label="Search"
+        >
+
+        <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </form>
+
+</div>

@@ -1,0 +1,211 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5 mb-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow-sm border-0 p-4">
+
+                <h2 class="mb-4">
+                    Complete your payment
+                </h2>
+
+                <!-- PROPERTY -->
+
+                <div class="mb-4">
+
+                    <h5>
+                        <%= listing.title %>
+                    </h5>
+
+                    <p class="text-muted mb-0">
+                        <%= listing.location %>,
+                        <%= listing.country %>
+                    </p>
+
+                </div>
+
+
+                <hr>
+
+
+                <!-- BOOKING DETAILS -->
+
+                <div class="d-flex justify-content-between mb-2">
+
+                    <span>Check-in</span>
+
+                    <strong>
+                        <%= booking.checkIn.toLocaleDateString("en-IN") %>
+                    </strong>
+
+                </div>
+
+
+                <div class="d-flex justify-content-between mb-2">
+
+                    <span>Check-out</span>
+
+                    <strong>
+                        <%= booking.checkOut.toLocaleDateString("en-IN") %>
+                    </strong>
+
+                </div>
+
+
+                <div class="d-flex justify-content-between mb-3">
+
+                    <span>Nights</span>
+
+                    <strong>
+                        <%= booking.nights %>
+                    </strong>
+
+                </div>
+
+
+                <hr>
+
+
+                <!-- TOTAL -->
+
+                <div class="d-flex justify-content-between mb-4">
+
+                    <h5>Total</h5>
+
+                    <h5>
+                        ₹<%= booking.totalPrice.toLocaleString("en-IN") %>
+                    </h5>
+
+                </div>
+
+
+                <!-- PAY BUTTON -->
+
+                <button
+                    id="pay-button"
+                    class="btn btn-danger w-100 py-2"
+                >
+                    Pay ₹<%= booking.totalPrice.toLocaleString("en-IN") %>
+                </button>
+
+
+                <p class="text-muted text-center mt-3 mb-0">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Secure test payment powered by Razorpay
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- RAZORPAY CHECKOUT -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+<script>
+
+    const options = {
+
+        key: "<%= keyId %>",
+
+        amount: "<%= razorpayOrder.amount %>",
+
+        currency: "INR",
+
+        name: "StayBee",
+
+        description: "StayBee Booking Payment",
+
+        order_id: "<%= razorpayOrder.id %>",
+
+
+       handler: async function (response) {
+
+    try {
+
+        const result = await fetch(
+            "/bookings/<%= booking._id %>/payment/verify",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    razorpay_payment_id:
+                        response.razorpay_payment_id,
+
+                    razorpay_order_id:
+                        response.razorpay_order_id,
+
+                    razorpay_signature:
+                        response.razorpay_signature
+                })
+            }
+        );
+
+
+        const data = await result.json();
+
+
+        if (data.success) {
+
+            window.location.href =
+                data.redirectUrl;
+
+        } else {
+
+            alert(
+                data.message ||
+                "Payment verification failed."
+            );
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert(
+            "Something went wrong while verifying payment."
+        );
+
+    }
+
+},
+
+        theme: {
+            color: "#fe424d"
+        }
+
+    };
+
+
+    const razorpay =
+        new Razorpay(options);
+
+
+    document
+        .getElementById("pay-button")
+        .onclick = function (event) {
+
+            razorpay.open();
+
+            event.preventDefault();
+
+        };
+
+</script>

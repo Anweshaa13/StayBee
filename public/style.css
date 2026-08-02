@@ -1,0 +1,892 @@
+body{
+    font-family:"Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+    
+/* navbar */
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-airbnb{
+    color:#fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+
+/* footer */
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials {
+    font-size: 1.2rem;
+    gap: 1.5rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+
+/* cards */
+
+.cards{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.card-img-top{
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 1rem;
+
+    filter: brightness(1.05) contrast(1.05);
+}
+
+.card-img-overlay{
+    color: white;
+
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.05)
+    );
+
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.card-img-overlay:hover{
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.1)
+    );
+}
+
+/* show page */
+
+.show-card{
+    border: none !important;
+}
+
+.show-img{
+    height: 35vh;
+    object-fit: cover;
+}
+
+.btns{
+    display: flex;
+    gap: 1rem;
+}
+.container {
+    flex: 1;
+}
+
+.add-btn{
+    margin-bottom: 2rem;
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* edit page */
+
+.edit-form{
+    margin-top: 2rem;
+}
+
+.edit-heading{
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.edit-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.add-btn{
+    margin-bottom: 1rem;
+}
+
+/* show page */
+
+.show-img{
+    height: 18rem;
+    object-fit: cover;
+}
+
+.listing-card-show{
+    border: none !important;
+}
+
+/* ===== Star Rating ===== */
+
+.rating{
+    display:flex;
+    flex-direction:row-reverse;
+    justify-content:flex-end;
+    gap:6px;
+}
+
+.rating input{
+    display:none;
+}
+
+.rating label{
+    font-size:2rem;
+    color:#ddd;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.rating label:hover,
+.rating label:hover ~ label{
+    color:#eaca38;
+}
+
+.rating input:checked ~ label{
+    color:#eaca38;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+main {
+    flex: 1;
+}
+
+#map{
+    height:400px;
+    width:100%;
+    border-radius:12px;
+    margin-top:20px;
+    margin-bottom:20px;
+
+}
+
+#filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-link {
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+}
+
+.filter {
+    text-align: center;
+    opacity: 0.7;
+    transition: 0.2s ease;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p {
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.filter i {
+    font-size: 1.2rem;
+}
+
+.tax-switch {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.25rem;
+    padding: 1rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+/* ==============================
+   AMENITY CHECKBOXES
+============================== */
+
+.form-check-input[type="checkbox"] {
+    width: 1.15rem;
+    height: 1.15rem;
+    background-color: white;
+    border: 1.5px solid #777;
+    cursor: pointer;
+}
+
+/* SELECTED */
+.form-check-input[type="checkbox"]:checked {
+    background-color: #fe424d;
+    border-color: #fe424d;
+}
+
+/* Remove Bootstrap green validation */
+.was-validated .form-check-input:valid,
+.form-check-input.is-valid {
+    border-color: #777 !important;
+}
+
+.was-validated .form-check-input:valid:checked,
+.form-check-input.is-valid:checked {
+    background-color: #fe424d !important;
+    border-color: #fe424d !important;
+}
+
+/* Remove green focus glow */
+.form-check-input:focus {
+    border-color: #fe424d;
+    box-shadow: 0 0 0 0.15rem rgba(254, 66, 77, 0.15);
+}
+
+.things-to-know {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.things-to-know h3 {
+    font-weight: 600;
+}
+
+.things-to-know h5 {
+    font-weight: 600;
+}
+
+.things-to-know p {
+    font-size: 0.95rem;
+    margin-bottom: 0.9rem;
+    color: #333;
+}
+
+.things-to-know h5 i {
+    color: #fe424d;
+}
+
+.things-to-know p i {
+    width: 20px;
+    color: #555;
+}
+
+/* =========================================
+   STAYBEE REVIEWS
+========================================= */
+
+.staybee-reviews {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.reviews-heading {
+    font-size: 1.45rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.reviews-heading i {
+    font-size: 1.1rem;
+    margin-right: 4px;
+}
+
+
+/* TWO COLUMN LAYOUT */
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 5rem;
+    row-gap: 2.5rem;
+}
+
+
+/* REMOVE CARD APPEARANCE */
+
+.review-item {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+
+/* USER */
+
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+
+/* AVATAR */
+
+.review-avatar {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f1f1;
+
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+
+/* NAME */
+
+.review-name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.review-user-subtitle {
+    color: #717171;
+    font-size: 0.9rem;
+    margin-top: 1px;
+}
+
+
+/* RATING + DATE */
+
+.review-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    font-size: 0.88rem;
+
+    margin-bottom: 0.65rem;
+}
+
+.review-stars {
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+
+/* COMMENT */
+
+.review-comment {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+
+    max-width: 540px;
+}
+
+
+/* DELETE */
+
+.review-delete {
+    border: none;
+    background: none;
+
+    padding: 0;
+    margin-top: 0.7rem;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+}
+
+
+/* ================================
+   REVIEW SUMMARY
+================================ */
+
+.review-summary {
+    margin: 2.5rem 0 3rem;
+    padding: 2rem 0;
+}
+
+.review-summary-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.8rem;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.review-summary-title i {
+    font-size: 1.25rem;
+}
+
+.review-summary-title span {
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+
+/* Rating section */
+
+.rating-breakdown {
+    width: 100%;
+    max-width: 380px;
+}
+
+.rating-row {
+    display: grid;
+
+    grid-template-columns:
+        18px
+        15px
+        1fr
+        25px;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 7px;
+}
+
+.rating-number {
+    font-size: 0.9rem;
+}
+
+.rating-star {
+    font-size: 0.65rem;
+}
+
+
+/* Grey background bar */
+
+.rating-bar {
+    width: 100%;
+    height: 5px;
+
+    background-color: #e5e5e5;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+/* Black filled portion */
+
+.rating-fill {
+    height: 100%;
+
+    background-color: #222;
+
+    border-radius: 10px;
+}
+
+.rating-count {
+    font-size: 0.85rem;
+    color: #555;
+    text-align: right;
+}
+
+
+/* RATING BREAKDOWN */
+
+.rating-breakdown {
+    max-width: 500px;
+}
+
+.rating-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 9px;
+}
+
+.rating-number {
+    width: 15px;
+    font-size: 0.9rem;
+}
+
+.rating-star {
+    font-size: 0.75rem;
+}
+
+
+/* BAR */
+
+.rating-bar {
+    width: 100%;
+    height: 7px;
+
+    background-color: #e5e5e5;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.rating-fill {
+    height: 100%;
+
+    background-color: #222;
+
+    border-radius: 10px;
+}
+
+
+/* NUMBER OF REVIEWS */
+
+.rating-count {
+    width: 25px;
+
+    text-align: right;
+
+    font-size: 0.9rem;
+
+    color: #666;
+}
+.rating-breakdown {
+    width: 100%;
+    max-width: 550px;
+}
+
+.rating-row {
+    display: grid;
+    grid-template-columns: 20px 18px 1fr 25px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.rating-number {
+    font-size: 0.9rem;
+}
+
+.rating-star {
+    font-size: 0.7rem;
+}
+
+.rating-bar {
+    display: flex;
+    width: 100%;
+    height: 7px;
+    gap: 2px;
+}
+
+.rating-segment {
+    flex: 1;
+    height: 100%;
+    background-color: #e2e2e2;
+}
+
+.rating-segment:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.rating-segment:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.rating-segment.filled {
+    background-color: #222;
+}
+
+.rating-count {
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+/* =========================================
+   LISTING GRID
+========================================= */
+
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.listings-grid > .col {
+    width: 100%;
+    padding: 0;
+}
+
+.listing-card {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.listing-card .card-img-top {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+    border-radius: 1rem !important;
+}
+
+
+/* TABLET */
+
+@media (max-width: 991px) {
+
+    .listings-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+
+    .listing-card .card-img-top {
+        height: 17rem;
+    }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+
+    .listings-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .listing-card .card-img-top {
+        height: 17rem;
+    }
+}
+
+/* =========================================
+   FINAL RESPONSIVE LISTING GRID
+========================================= */
+
+.listings-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.listings-grid .listing-card {
+    width: 100% !important;
+    min-width: 0;
+    margin: 0 !important;
+}
+
+.listings-grid .card-img-top {
+    width: 100% !important;
+    height: 18rem !important;
+    object-fit: cover !important;
+}
+
+
+/* TABLET */
+
+@media (max-width: 991px) {
+
+    .listings-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+
+    .listings-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem;
+    }
+
+    .listings-grid .card-img-top {
+        height: 17rem !important;
+    }
+
+}
+
+/* Hide mobile search on desktop */
+.mobile-search {
+    display: none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 767px) {
+
+    /* Hide desktop search */
+    .desktop-search {
+        display: none !important;
+    }
+
+    /* Show mobile search */
+    .mobile-search {
+        display: block;
+        background: white;
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .mobile-search-form {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .mobile-search-form input {
+        width: 100%;
+        height: 46px;
+
+        border: 1px solid #ddd;
+        border-radius: 50px;
+
+        padding-left: 1.2rem;
+        padding-right: 3.5rem;
+    }
+
+    .mobile-search-form input:focus {
+        box-shadow: none;
+        border-color: #fe424d;
+    }
+
+    .mobile-search-form button {
+        position: absolute;
+        right: 6px;
+
+        width: 36px;
+        height: 36px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: #fe424d;
+        color: white;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.paid-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+
+    background-color: #e8f5e9;
+    color: #198754;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.failed-badge {
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+
+    background-color: #fdecec;
+    color: #dc3545;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.pending-payment-badge {
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+
+    background-color: #fff3cd;
+    color: #856404;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+}

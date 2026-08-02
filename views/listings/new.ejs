@@ -1,0 +1,688 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row">
+
+    <div class="col-8 offset-2 mt-3">
+
+        <h1 class="mb-3">
+            Create a New Listing
+        </h1>
+
+        <form 
+            method="POST" 
+            action="/listings" novalidate
+            class="needs-validation"
+            enctype="multipart/form-data"
+        >
+
+            <!-- TITLE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Title
+                </label>
+
+                <input
+                    name="listing[title]"
+                    placeholder="Add a catchy title"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Please add a title.
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Description
+                </label>
+
+                <textarea
+                    name="listing[description]"
+                    class="form-control"
+                    rows="2"
+                    required
+                ></textarea>
+
+                <div class="invalid-feedback">
+                    Please add a description.
+                </div>
+
+            </div>
+
+
+            <!-- IMAGE (OPTIONAL) -->
+
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                     Upload Listing Image 
+                </label>
+
+                <input
+                    name="listing[image]"
+                   
+                    type="file"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+            <!-- PRICE + COUNTRY -->
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Price
+                    </label>
+
+                    <input
+                        name="listing[price]"
+                        placeholder="1200"
+                        type="number"
+                        class="form-control"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter price.
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-8 mb-3">
+
+                    <label class="form-label">
+                        Country
+                    </label>
+
+                    <input
+                        name="listing[country]"
+                        placeholder="India"
+                        type="text"
+                        class="form-control"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter country.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Location
+                </label>
+
+                <input
+                    name="listing[location]"
+                    placeholder="Jaipur, Rajasthan"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Please enter location.
+                </div>
+
+            </div>
+<!-- CATEGORY -->
+
+<div class="mb-3">
+
+    <label for="category" class="form-label">
+        Category
+    </label>
+
+    <select
+        name="listing[category]"
+        id="category"
+        class="form-select"
+        required
+    >
+        <option value="" selected disabled>
+            Select a category
+        </option>
+
+        <option value="Heritage">Heritage</option>
+        <option value="City">City</option>
+        <option value="Mountain">Mountain</option>
+        <option value="Beach">Beach</option>
+        <option value="Nature">Nature</option>
+        <option value="Unique">Unique</option>
+
+    </select>
+
+    <div class="invalid-feedback">
+        Please select a category.
+    </div>
+
+</div>
+
+<div class="mb-4">
+
+    <label class="form-label fw-semibold">
+        What does your place offer?
+    </label>
+
+    <div class="row mt-2">
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="WiFi"
+                id="wifi"
+            >
+            <label class="form-check-label ms-2" for="wifi">
+                <i class="fa-solid fa-wifi"></i>
+                Wi-Fi
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Kitchen"
+                id="kitchen"
+            >
+            <label class="form-check-label ms-2" for="kitchen">
+                <i class="fa-solid fa-utensils"></i>
+                Kitchen
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Air Conditioning"
+                id="ac"
+            >
+            <label class="form-check-label ms-2" for="ac">
+                <i class="fa-solid fa-snowflake"></i>
+                Air conditioning
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Free Parking"
+                id="parking"
+            >
+            <label class="form-check-label ms-2" for="parking">
+                <i class="fa-solid fa-car"></i>
+                Free parking
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Washing Machine"
+                id="washingMachine"
+            >
+            <label class="form-check-label ms-2" for="washingMachine">
+                <i class="fa-solid fa-shirt"></i>
+                Washing machine
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="TV"
+                id="tv"
+            >
+            <label class="form-check-label ms-2" for="tv">
+                <i class="fa-solid fa-tv"></i>
+                TV
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Garden"
+                id="garden"
+            >
+            <label class="form-check-label ms-2" for="garden">
+                <i class="fa-solid fa-seedling"></i>
+                Garden
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Hair Dryer"
+                id="hairDryer"
+            >
+            <label class="form-check-label ms-2" for="hairDryer">
+                <i class="fa-solid fa-wind"></i>
+                Hair dryer
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Workspace"
+                id="workspace"
+            >
+            <label class="form-check-label ms-2" for="workspace">
+                <i class="fa-solid fa-laptop"></i>
+                Dedicated workspace
+            </label>
+        </div>
+
+
+        <div class="col-md-6 mb-2">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Security Camera"
+                id="camera"
+            >
+            <label class="form-check-label ms-2" for="camera">
+                <i class="fa-solid fa-video"></i>
+                Exterior security camera
+            </label>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- THINGS TO KNOW -->
+<!-- ===================================== -->
+
+<hr class="my-4">
+
+<div class="mb-4">
+
+    <h4 class="mb-2">Things to know</h4>
+
+    <p class="text-muted mb-4">
+        Add important information guests should know before booking.
+    </p>
+
+
+    <!-- =============================== -->
+    <!-- CHECK-IN + CHECK-OUT -->
+    <!-- =============================== -->
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <label class="form-label fw-semibold">
+                Check-in time
+            </label>
+
+            <select
+                name="listing[thingsToKnow][checkIn]"
+                class="form-select"
+            >
+                <option value="12:00 PM">12:00 PM</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="2:00 PM">2:00 PM</option>
+                <option value="3:00 PM">3:00 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+            </select>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <label class="form-label fw-semibold">
+                Check-out time
+            </label>
+
+            <select
+                name="listing[thingsToKnow][checkOut]"
+                class="form-select"
+            >
+                <option value="9:00 AM">9:00 AM</option>
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="11:00 AM" selected>11:00 AM</option>
+                <option value="12:00 PM">12:00 PM</option>
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =============================== -->
+    <!-- MAXIMUM GUESTS -->
+    <!-- =============================== -->
+
+    <div class="mb-4">
+
+        <label class="form-label fw-semibold">
+            Maximum guests
+        </label>
+
+        <input
+            type="number"
+            name="listing[thingsToKnow][maxGuests]"
+            class="form-control"
+            value="2"
+            min="1"
+            max="50"
+            required
+        >
+
+    </div>
+
+
+    <!-- =============================== -->
+    <!-- CANCELLATION POLICY -->
+    <!-- =============================== -->
+
+    <div class="mb-4">
+
+        <label class="form-label fw-semibold">
+            Cancellation policy
+        </label>
+
+        <select
+            name="listing[thingsToKnow][cancellationPolicy]"
+            class="form-select"
+        >
+
+            <option value="Free cancellation for 24 hours.">
+                Free cancellation for 24 hours
+            </option>
+
+            <option value="Free cancellation up to 5 days before check-in.">
+                Free cancellation up to 5 days before check-in
+            </option>
+
+            <option value="Free cancellation up to 7 days before check-in.">
+                Free cancellation up to 7 days before check-in
+            </option>
+
+            <option value="This reservation is non-refundable.">
+                Non-refundable
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- =============================== -->
+    <!-- HOUSE RULES -->
+    <!-- =============================== -->
+
+    <h5 class="mt-4 mb-3">
+        <i class="fa-solid fa-key me-2"></i>
+        House rules
+    </h5>
+
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="No smoking"
+                id="noSmoking"
+            >
+
+            <label class="form-check-label ms-2" for="noSmoking">
+                No smoking
+            </label>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="No parties or events"
+                id="noParties"
+            >
+
+            <label class="form-check-label ms-2" for="noParties">
+                No parties or events
+            </label>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="Pets allowed"
+                id="petsAllowed"
+            >
+
+            <label class="form-check-label ms-2" for="petsAllowed">
+                Pets allowed
+            </label>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="Quiet hours after 10 PM"
+                id="quietHours"
+            >
+
+            <label class="form-check-label ms-2" for="quietHours">
+                Quiet hours after 10 PM
+            </label>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="Children allowed"
+                id="childrenAllowed"
+            >
+
+            <label class="form-check-label ms-2" for="childrenAllowed">
+                Children allowed
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- =============================== -->
+    <!-- SAFETY -->
+    <!-- =============================== -->
+
+    <h5 class="mt-4 mb-3">
+        <i class="fa-solid fa-shield-halved me-2"></i>
+        Safety & property
+    </h5>
+
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Exterior security cameras"
+                id="securityCameras"
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="securityCameras"
+            >
+                Exterior security cameras
+            </label>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Smoke alarm"
+                id="smokeAlarm"
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="smokeAlarm"
+            >
+                Smoke alarm
+            </label>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Carbon monoxide alarm"
+                id="carbonAlarm"
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="carbonAlarm"
+            >
+                Carbon monoxide alarm
+            </label>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Pool or hot tub"
+                id="pool"
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="pool"
+            >
+                Pool or hot tub
+            </label>
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Stairs required"
+                id="stairs"
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="stairs"
+            >
+                Stairs required
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <button class="btn btn-danger add-btn">
+                Add
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

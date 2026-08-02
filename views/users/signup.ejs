@@ -1,0 +1,41 @@
+<% layout("/layouts/boilerplate")%>
+
+<div class="row mt-3">
+    <h1 class="col-6 offset-3">SignUp on StayBee</h1>
+    <div class="col-6 offset-3">
+        <form action="/signup" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="username" class="form-labels">Username</label>
+                <input
+                name="username"
+                id="username"
+                type="text"
+                class="form-control"
+                required
+                />
+                <div class="valid feedback"></div>
+
+                 <div class="mb-3">
+                <labels for="email" class="form-labels">email</labels>
+                <input
+                name="email"
+                id="email"
+                type="email"
+                class="form-control"
+                required
+                />
+
+               <div class="mb-3">
+                <labels for="password" class="form-labels">password</labels>
+                <input
+                name="password"
+                id="password"
+                type="password"
+                class="form-control"
+                required
+                />
+            </div>
+            <button class="btn btn-success">SignUp</button>
+        </form>
+    </div>
+</div>

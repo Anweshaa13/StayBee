@@ -1,0 +1,870 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+
+    <div class="col-8 offset-2">
+
+        <h1>Edit Listing</h1>
+
+        <form 
+            method="POST" 
+            action="/listings/<%= listing._id %>?_method=PUT"
+            novalidate
+            class="needs-validation"
+            enctype="multipart/form-data"
+        >
+
+            <div class="mb-3">
+
+                <label for="title" class="form-label">
+                    Title
+                </label>
+
+                <input
+                    name="listing[title]"
+                    value="<%= listing.title %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+            <div class="mb-3">
+
+                <label for="description" class="form-label">
+                    Description
+                </label>
+
+                <textarea
+                    name="listing[description]"
+                    class="form-control"
+                    rows="3"
+                    required
+                ><%= listing.description %> </textarea>
+
+            </div>
+
+ <div class="mb-3">
+    <label class="form-label">Current Image</label>
+    <br>
+    <img
+        src="<%= listing.image.url %>"
+        alt="Current Listing Image"
+        width="250"
+        class="rounded shadow-sm"
+    >
+</div>
+
+
+
+
+            <div class="mb-3">
+
+                <label for="image" class="form-label">
+                   Upload New Image 
+                </label>
+
+                <input
+                    name="listing[image]"
+                    type="file"
+                    class="form-control" >
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label for="price" class="form-label">
+                        Price
+                    </label>
+
+                    <input
+                        name="listing[price]"
+                        value="<%= listing.price %>"
+                        type="number"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label for="country" class="form-label">
+                        Country
+                    </label>
+
+                    <input
+                        name="listing[country]"
+                        value="<%= listing.country %>"
+                        type="text"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label for="location" class="form-label">
+                    Location
+                </label>
+
+                <input
+                    name="listing[location]"
+                    value="<%= listing.location %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+<!-- CATEGORY -->
+
+<div class="mb-3">
+
+    <label for="category" class="form-label">
+        Category
+    </label>
+
+    <select
+        name="listing[category]"
+        id="category"
+        class="form-select"
+        required
+    >
+        <option value="">Select a category</option>
+
+        <option value="Beach"
+            <%= listing.category === "Beach" ? "selected" : "" %>>
+            Beach
+        </option>
+
+        <option value="Mountain"
+            <%= listing.category === "Mountain" ? "selected" : "" %>>
+            Mountain
+        </option>
+
+        <option value="City"
+            <%= listing.category === "City" ? "selected" : "" %>>
+            City
+        </option>
+
+        <option value="Heritage"
+            <%= listing.category === "Heritage" ? "selected" : "" %>>
+            Heritage
+        </option>
+
+        <option value="Nature"
+            <%= listing.category === "Nature" ? "selected" : "" %>>
+            Nature
+        </option>
+
+        <option value="Unique"
+            <%= listing.category === "Unique" ? "selected" : "" %>>
+            Unique
+        </option>
+
+    </select>
+
+    <div class="invalid-feedback">
+        Please select a category.
+    </div>
+
+</div>
+
+<!-- =========================
+     AMENITIES
+========================= -->
+
+<div class="mb-4">
+
+    <h4 class="mb-3">Amenities</h4>
+
+    <p class="text-muted">
+        Select the amenities available at this property.
+    </p>
+
+    <%
+        const currentAmenities = Array.isArray(listing.amenities)
+            ? listing.amenities
+            : [];
+    %>
+
+    <div class="row">
+
+        <!-- WIFI -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="WiFi"
+                id="editWifi"
+                <%= currentAmenities.includes("WiFi") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editWifi">
+                <i class="fa-solid fa-wifi"></i>
+                Wi-Fi
+            </label>
+        </div>
+
+
+        <!-- KITCHEN -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Kitchen"
+                id="editKitchen"
+                <%= currentAmenities.includes("Kitchen") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editKitchen">
+                <i class="fa-solid fa-utensils"></i>
+                Kitchen
+            </label>
+        </div>
+
+
+        <!-- AIR CONDITIONING -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Air Conditioning"
+                id="editAC"
+                <%= currentAmenities.includes("Air Conditioning") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editAC">
+                <i class="fa-solid fa-snowflake"></i>
+                Air conditioning
+            </label>
+        </div>
+
+
+        <!-- FREE PARKING -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Free Parking"
+                id="editParking"
+                <%= currentAmenities.includes("Free Parking") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editParking">
+                <i class="fa-solid fa-car"></i>
+                Free parking
+            </label>
+        </div>
+
+
+        <!-- WASHING MACHINE -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Washing Machine"
+                id="editWashingMachine"
+                <%= currentAmenities.includes("Washing Machine") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editWashingMachine">
+                <i class="fa-solid fa-shirt"></i>
+                Washing machine
+            </label>
+        </div>
+
+
+        <!-- TV -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="TV"
+                id="editTV"
+                <%= currentAmenities.includes("TV") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editTV">
+                <i class="fa-solid fa-tv"></i>
+                TV
+            </label>
+        </div>
+
+
+        <!-- GARDEN -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Garden"
+                id="editGarden"
+                <%= currentAmenities.includes("Garden") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editGarden">
+                <i class="fa-solid fa-seedling"></i>
+                Garden
+            </label>
+        </div>
+
+
+        <!-- HAIR DRYER -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Hair Dryer"
+                id="editHairDryer"
+                <%= currentAmenities.includes("Hair Dryer") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editHairDryer">
+                <i class="fa-solid fa-wind"></i>
+                Hair dryer
+            </label>
+        </div>
+
+
+        <!-- WORKSPACE -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Workspace"
+                id="editWorkspace"
+                <%= currentAmenities.includes("Workspace") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editWorkspace">
+                <i class="fa-solid fa-laptop"></i>
+                Dedicated workspace
+            </label>
+        </div>
+
+
+        <!-- SECURITY CAMERA -->
+        <div class="col-md-6 mb-3">
+            <input
+                class="form-check-input amenity-checkbox"
+                type="checkbox"
+                name="listing[amenities][]"
+                value="Security Camera"
+                id="editCamera"
+                <%= currentAmenities.includes("Security Camera") ? "checked" : "" %>
+            >
+
+            <label class="form-check-label ms-2" for="editCamera">
+                <i class="fa-solid fa-video"></i>
+                Exterior security camera
+            </label>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- THINGS TO KNOW -->
+<!-- ===================================== -->
+
+<hr class="my-4">
+
+<div class="mb-4">
+
+    <h4 class="mb-2">Things to know</h4>
+
+    <p class="text-muted mb-4">
+        Add important information guests should know before booking.
+    </p>
+
+    <%
+        const things = listing.thingsToKnow || {};
+
+        const currentHouseRules =
+            Array.isArray(things.houseRules)
+                ? things.houseRules
+                : [];
+
+        const currentSafety =
+            Array.isArray(things.safety)
+                ? things.safety
+                : [];
+    %>
+
+
+    <!-- ================================= -->
+    <!-- CHECK-IN + CHECK-OUT -->
+    <!-- ================================= -->
+
+    <div class="row">
+
+        <!-- CHECK-IN -->
+
+        <div class="col-md-6 mb-3">
+
+            <label class="form-label fw-semibold">
+                Check-in time
+            </label>
+
+            <select
+                name="listing[thingsToKnow][checkIn]"
+                class="form-select"
+            >
+
+                <option
+                    value="12:00 PM"
+                    <%= things.checkIn === "12:00 PM" ? "selected" : "" %>
+                >
+                    12:00 PM
+                </option>
+
+                <option
+                    value="1:00 PM"
+                    <%= things.checkIn === "1:00 PM" ? "selected" : "" %>
+                >
+                    1:00 PM
+                </option>
+
+                <option
+                    value="2:00 PM"
+                    <%= things.checkIn === "2:00 PM" ? "selected" : "" %>
+                >
+                    2:00 PM
+                </option>
+
+                <option
+                    value="3:00 PM"
+                    <%= things.checkIn === "3:00 PM" ? "selected" : "" %>
+                >
+                    3:00 PM
+                </option>
+
+                <option
+                    value="4:00 PM"
+                    <%= things.checkIn === "4:00 PM" ? "selected" : "" %>
+                >
+                    4:00 PM
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- CHECK-OUT -->
+
+        <div class="col-md-6 mb-3">
+
+            <label class="form-label fw-semibold">
+                Check-out time
+            </label>
+
+            <select
+                name="listing[thingsToKnow][checkOut]"
+                class="form-select"
+            >
+
+                <option
+                    value="9:00 AM"
+                    <%= things.checkOut === "9:00 AM" ? "selected" : "" %>
+                >
+                    9:00 AM
+                </option>
+
+                <option
+                    value="10:00 AM"
+                    <%= things.checkOut === "10:00 AM" ? "selected" : "" %>
+                >
+                    10:00 AM
+                </option>
+
+                <option
+                    value="11:00 AM"
+                    <%= (!things.checkOut || things.checkOut === "11:00 AM") ? "selected" : "" %>
+                >
+                    11:00 AM
+                </option>
+
+                <option
+                    value="12:00 PM"
+                    <%= things.checkOut === "12:00 PM" ? "selected" : "" %>
+                >
+                    12:00 PM
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- MAXIMUM GUESTS -->
+    <!-- ================================= -->
+
+    <div class="mb-4">
+
+        <label class="form-label fw-semibold">
+            Maximum guests
+        </label>
+
+        <input
+            type="number"
+            name="listing[thingsToKnow][maxGuests]"
+            class="form-control"
+            value="<%= things.maxGuests || 2 %>"
+            min="1"
+            max="50"
+            required
+        >
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- CANCELLATION POLICY -->
+    <!-- ================================= -->
+
+    <div class="mb-4">
+
+        <label class="form-label fw-semibold">
+            Cancellation policy
+        </label>
+
+        <select
+            name="listing[thingsToKnow][cancellationPolicy]"
+            class="form-select"
+        >
+
+            <option
+                value="Free cancellation for 24 hours."
+                <%= (!things.cancellationPolicy || things.cancellationPolicy === "Free cancellation for 24 hours.") ? "selected" : "" %>
+            >
+                Free cancellation for 24 hours
+            </option>
+
+
+            <option
+                value="Free cancellation up to 5 days before check-in."
+                <%= things.cancellationPolicy === "Free cancellation up to 5 days before check-in." ? "selected" : "" %>
+            >
+                Free cancellation up to 5 days before check-in
+            </option>
+
+
+            <option
+                value="Free cancellation up to 7 days before check-in."
+                <%= things.cancellationPolicy === "Free cancellation up to 7 days before check-in." ? "selected" : "" %>
+            >
+                Free cancellation up to 7 days before check-in
+            </option>
+
+
+            <option
+                value="This reservation is non-refundable."
+                <%= things.cancellationPolicy === "This reservation is non-refundable." ? "selected" : "" %>
+            >
+                Non-refundable
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- HOUSE RULES -->
+    <!-- ================================= -->
+
+    <h5 class="mt-4 mb-3">
+
+        <i class="fa-solid fa-key me-2"></i>
+
+        House rules
+
+    </h5>
+
+
+    <div class="row">
+
+
+        <!-- NO SMOKING -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="No smoking"
+                id="editNoSmoking"
+                <%= currentHouseRules.includes("No smoking") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editNoSmoking"
+            >
+                No smoking
+            </label>
+
+        </div>
+
+
+        <!-- NO PARTIES -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="No parties or events"
+                id="editNoParties"
+                <%= currentHouseRules.includes("No parties or events") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editNoParties"
+            >
+                No parties or events
+            </label>
+
+        </div>
+
+
+        <!-- PETS -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="Pets allowed"
+                id="editPets"
+                <%= currentHouseRules.includes("Pets allowed") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editPets"
+            >
+                Pets allowed
+            </label>
+
+        </div>
+
+
+        <!-- QUIET HOURS -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="Quiet hours after 10 PM"
+                id="editQuietHours"
+                <%= currentHouseRules.includes("Quiet hours after 10 PM") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editQuietHours"
+            >
+                Quiet hours after 10 PM
+            </label>
+
+        </div>
+
+
+        <!-- CHILDREN -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][houseRules][]"
+                value="Children allowed"
+                id="editChildren"
+                <%= currentHouseRules.includes("Children allowed") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editChildren"
+            >
+                Children allowed
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- SAFETY & PROPERTY -->
+    <!-- ================================= -->
+
+    <h5 class="mt-4 mb-3">
+
+        <i class="fa-solid fa-shield-halved me-2"></i>
+
+        Safety & property
+
+    </h5>
+
+
+    <div class="row">
+
+
+        <!-- SECURITY CAMERAS -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Exterior security cameras"
+                id="editSecurityCameras"
+                <%= currentSafety.includes("Exterior security cameras") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editSecurityCameras"
+            >
+                Exterior security cameras
+            </label>
+
+        </div>
+
+
+        <!-- SMOKE ALARM -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Smoke alarm"
+                id="editSmokeAlarm"
+                <%= currentSafety.includes("Smoke alarm") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editSmokeAlarm"
+            >
+                Smoke alarm
+            </label>
+
+        </div>
+
+
+        <!-- CARBON MONOXIDE -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Carbon monoxide alarm"
+                id="editCarbonAlarm"
+                <%= currentSafety.includes("Carbon monoxide alarm") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editCarbonAlarm"
+            >
+                Carbon monoxide alarm
+            </label>
+
+        </div>
+
+
+        <!-- POOL -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Pool or hot tub"
+                id="editPool"
+                <%= currentSafety.includes("Pool or hot tub") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editPool"
+            >
+                Pool or hot tub
+            </label>
+
+        </div>
+
+
+        <!-- STAIRS -->
+
+        <div class="col-md-6 mb-3">
+
+            <input
+                type="checkbox"
+                class="form-check-input"
+                name="listing[thingsToKnow][safety][]"
+                value="Stairs required"
+                id="editStairs"
+                <%= currentSafety.includes("Stairs required") ? "checked" : "" %>
+            >
+
+            <label
+                class="form-check-label ms-2"
+                for="editStairs"
+            >
+                Stairs required
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+           <button class="btn btn-dark edit-btn">
+    Edit
+</button>
+
+        </form>
+
+    </div>
+
+</div>
+<script src="/js/script.js"></script>

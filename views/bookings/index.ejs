@@ -1,0 +1,290 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">
+        <i class="fa-solid fa-suitcase"></i>
+        My Bookings
+    </h2>
+
+
+    <% if (bookings.length === 0) { %>
+
+        <!-- NO BOOKINGS -->
+
+        <div class="text-center mt-5">
+
+            <i
+                class="fa-solid fa-calendar-xmark"
+                style="font-size: 3rem; color: #fe424d;"
+            ></i>
+
+            <h3 class="mt-3">
+                No bookings yet
+            </h3>
+
+            <p class="text-muted">
+                Start exploring stays and book your next trip!
+            </p>
+
+            <a href="/listings" class="btn btn-danger">
+                Explore Stays
+            </a>
+
+        </div>
+
+
+    <% } else { %>
+
+
+        <!-- BOOKING CARDS -->
+
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+
+            <% for (let booking of bookings) { %>
+
+                <% if (booking.listing) { %>
+
+                    <div class="col">
+
+                        <div class="card h-100 shadow-sm">
+
+
+                            <!-- PROPERTY IMAGE -->
+
+                            <img
+                                src="<%= booking.listing.image.url %>"
+                                class="card-img-top"
+                                style="height: 220px; object-fit: cover;"
+                                alt="stay"
+                            >
+
+
+                            <div class="card-body">
+
+                                <!-- TITLE -->
+
+                                <h5 class="card-title">
+                                    <%= booking.listing.title %>
+                                </h5>
+
+
+                                <!-- LOCATION -->
+
+                                <p class="text-muted">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <%= booking.listing.location %>,
+                                    <%= booking.listing.country %>
+
+                                </p>
+
+
+                                <hr>
+
+
+                                <!-- CHECK-IN -->
+
+                                <p>
+                                    <strong>Check-in:</strong>
+
+                                    <%= new Date(booking.checkIn)
+                                        .toLocaleDateString("en-IN") %>
+                                </p>
+
+
+                                <!-- CHECK-OUT -->
+
+                                <p>
+                                    <strong>Check-out:</strong>
+
+                                    <%= new Date(booking.checkOut)
+                                        .toLocaleDateString("en-IN") %>
+                                </p>
+
+
+                                <!-- NIGHTS -->
+
+                                <p>
+                                    <strong>Nights:</strong>
+                                    <%= booking.nights %>
+                                </p>
+
+
+                                <!-- TOTAL PRICE -->
+
+                                <p>
+                                    <strong>Total:</strong>
+
+                                    &#8377;<%= booking.totalPrice
+                                        .toLocaleString("en-IN") %>
+                                </p>
+<div class="payment-status mt-2">
+
+    <% if (booking.paymentStatus === "paid") { %>
+
+        <span class="paid-badge">
+            <i class="fa-solid fa-circle-check"></i>
+            Paid
+        </span>
+
+    <% } else if (booking.paymentStatus === "failed") { %>
+
+        <span class="failed-badge">
+            Payment Failed
+        </span>
+
+    <% } else { %>
+
+        <span class="pending-payment-badge">
+            Payment Pending
+        </span>
+
+    <% } %>
+
+</div>
+<% if (booking.paymentStatus === "paid") { %>
+
+    <a
+        href="/bookings/<%= booking._id %>/receipt"
+        class="btn btn-outline-dark mt-3"
+    >
+        <i class="fa-solid fa-file-pdf"></i>
+        Download Receipt
+    </a>
+
+<% } %>
+
+                                <!-- BOOKING STATUS -->
+
+                                <p>
+                                    <strong>Status:</strong>
+
+                                    <% if (!booking.status || booking.status === "pending") { %>
+
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+
+                                    <% } else if (booking.status === "confirmed") { %>
+
+                                        <span class="badge bg-success">
+                                            Confirmed
+                                        </span>
+
+                                    <% } else if (booking.status === "rejected") { %>
+
+                                        <span class="badge bg-danger">
+                                            Rejected
+                                        </span>
+
+                                    <% } else if (booking.status === "cancelled") { %>
+
+                                        <span class="badge bg-secondary">
+                                            Cancelled
+                                        </span>
+
+                                    <% } else if (booking.status === "completed") { %>
+
+                                        <span class="badge bg-primary">
+                                            Completed
+                                        </span>
+
+                                    <% } %>
+
+                                </p>
+
+
+                                <!-- BUTTONS -->
+
+                                <div class="d-flex gap-2 flex-wrap mt-3">
+
+                                    <!-- VIEW STAY -->
+
+                                    <a
+                                        href="/listings/<%= booking.listing._id %>"
+                                        class="btn btn-outline-dark"
+                                    >
+                                        View Stay
+                                    </a>
+
+
+                                    <!-- CANCEL BOOKING -->
+
+                                    <% if (
+                                        !booking.status ||
+                                        booking.status === "pending" ||
+                                        booking.status === "confirmed"
+                                    ) { %>
+
+                                        <form
+                                            action="/bookings/<%= booking._id %>?_method=DELETE"
+                                            method="POST"
+                                        >
+
+                                            <button
+                                                type="submit"
+                                                class="btn btn-outline-danger"
+                                            >
+                                                Cancel Booking
+                                            </button>
+
+                                        </form>
+
+                                    <% } %>
+
+                                </div>
+
+
+                                <!-- REJECTED MESSAGE -->
+
+                                <% if (booking.status === "rejected") { %>
+
+                                    <p class="text-danger mt-3 mb-0">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                        Your booking request was not accepted by the host.
+                                    </p>
+
+                                <% } %>
+
+
+                                <!-- CANCELLED MESSAGE -->
+
+                                <% if (booking.status === "cancelled") { %>
+
+                                    <p class="text-muted mt-3 mb-0">
+                                        <i class="fa-solid fa-ban"></i>
+                                        You cancelled this booking.
+                                    </p>
+
+                                <% } %>
+
+
+                                <!-- CONFIRMED MESSAGE -->
+
+                                <% if (booking.status === "confirmed") { %>
+
+                                    <p class="text-success mt-3 mb-0">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        Your stay has been confirmed!
+                                    </p>
+
+                                <% } %>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <% } %>
+
+            <% } %>
+
+        </div>
+
+    <% } %>
+
+</div>
